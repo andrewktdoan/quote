@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>User</title>
+	<link rel="stylesheet" href="">
+
+	<style>
+		.submit{
+			width: 75px;
+			height: 30px;
+			background-color: blue;
+			color:white;
+			border-radius: 5px;
+			/*margin-left: 75px;*/
+		}
+		#submit{
+			width: 150px;
+
+		}
+	</style>
+</head>
+<body>
+	<div>
+		{% for user in all_users %}
+			<h2>Welcome {{user.name}}!</h2>
+		{% endfor %}
+	</div>
+	<div class="quotable">
+		<h3>Quotable Quotes</h3>
+
+		<h2><em>Quote goes here</em></h2>
+		
+		<p><em>Posted by {{user.name}}</em></p>
+		<form action="/user" method="post">{%csrf_token%}
+			<input class="submit" type="submit" id="submit" value="Add to My List">
+		</form>
+	</div>
+	<br>
+	<br>
+
+	<div class="quotable">
+		<h3>Favorite Quotes</h3>
+
+		<h2><em>Quote goes here</em></h2>
+
+		
+		<p><em>Posted by {{user.name}}</em></p>
+		<form action="/user" method="post">{%csrf_token%}
+			<input class="submit" type="submit" id="submit" value="Remove from My List">
+		</form>
+	</div>
+	<br>
+	<br>
+
+
+
+	<div class="contribute">
+		<p>Contribute a Quote:</p>
+		<form action="/quote" method="post">{%csrf_token%}
+			<p>Quoted By: <input type="text"></p>
+			<p>Message: <textarea name="message" id="" cols="30" rows="10"></textarea></p>
+		</form>
+		<form action="/quote" method="post">{%csrf_token%}
+			<input class="submit" type="submit" name="submit" value="Submit">
+		</form>
+	</div>
+
+	<form action="/logout" method="post">{%csrf_token%}
+		<input class="submit" type="submit" name="logout" value="logout">
+	</form>
+</body>
+</html>
